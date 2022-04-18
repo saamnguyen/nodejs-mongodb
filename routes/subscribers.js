@@ -30,9 +30,29 @@ router.post("/", async (req, res) => {
 	}
 });
 
-router.patch("/:id", (req, res) => {});
+router.patch("/:id", getSubcriber, async (req, res) => {
+	if (req.body.name != null) {
+		res.subscriber.name = req.body.name;
+	}
+	if (req.body.subscribedToChannel != null) {
+		res.subscriber.subscribedToChannel = req.body.subscribedToChannel;
+	}
+	try {
+		const updateSubscriber = await res.subscriber.save();
+		res.json(updateSubscriber);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
+});
 
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", getSubcriber, async (req, res) => {
+	try {
+		await res.subscriber.remove();
+		res.json({ message: "Deleted !!!" });
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+});
 
 async function getSubcriber(req, res, next) {
 	let subscriber;

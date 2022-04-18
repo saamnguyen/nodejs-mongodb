@@ -13,3 +13,17 @@ Content-Type: application/json
     "name": "Finn2",
     "subscribedToChannel": "Java"
 }
+
+###
+PATCH http://localhost:3000/subscribers/625d15417dd0000450328c57
+Content-Type: application/json
+
+{
+    "name": "New Name",
+    "subscribedToChannel": "Java"
+}
+
+
+###
+
+DELETE http://localhost:3000/subscribers/625d194d9931b334ac4d7987
